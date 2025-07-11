@@ -17,7 +17,8 @@ public class CarServiceTest {
 		System.out.println("1. Oil Change (₹500)");
 		System.out.println("2. Wheel Alignment (₹400)");
 		System.out.println("3. Both");
-		System.out.print("Enter your choice (1/2/3): ");
+		System.out.println("4. Nothing");
+		System.out.print("Enter your choice : ");
 		int choice = scanner.nextInt();
 
 		switch (choice) {
@@ -31,12 +32,15 @@ public class CarServiceTest {
 			service = new OilChange(service);
 			service = new WheelAlign(service);
 			break;
-
+		case 4:
+			System.out.println("Total Service Cost: ₹" + service.getCost());
+			return;
 		default:
 			System.out.println("No additional services selected.");
 		}
 
 		System.out.println("Total Service Cost: ₹" + service.getCost());
 		scanner.close();
+
 	}
 }
