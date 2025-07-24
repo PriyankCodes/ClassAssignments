@@ -20,7 +20,7 @@ public class EmployeeSalaryTest {
 		Map<String, Employee> highestPaid = employees.stream()
 				.collect(Collectors.groupingBy(employee -> employee.getDepartment(),
 						Collectors.collectingAndThen(Collectors.maxBy(
-								(employye1, employee2) -> Double.compare(employye1.getSalary(), employee2.getSalary())),
+								(employee1, employee2) -> Double.compare(employee1.getSalary(), employee2.getSalary())),
 								optional -> optional.get())));
 
 		highestPaid.forEach((department, employee) -> {
