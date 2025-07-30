@@ -12,10 +12,10 @@ public class BankService {
 
 	private BankDAO dao = new BankDAO();
 
-	public String transferFunds(Connection conn, int senderId, int receiverId, double amount) throws SQLException {
-		conn.setAutoCommit(false);
-		Account sender = dao.getAccountById(conn, senderId);
-		Account receiver = dao.getAccountById(conn, receiverId);
+	public String transferFunds(Connection connection, int senderId, int receiverId, double amount) throws SQLException {
+		connection.setAutoCommit(false);
+		Account sender = dao.getAccountById(connection, senderId);
+		Account receiver = dao.getAccountById(connection, receiverId);
 
 		if (sender == null || receiver == null)
 			return "One of the accounts does not exist.";
@@ -24,16 +24,16 @@ public class BankService {
 		if (sender.getBalance() < amount)
 			return "Insufficient balance.";
 
-		dao.updateBalance(conn, senderId, sender.getBalance() - amount);
-		Savepoint savePoint = conn.setSavepoint();
+		dao.updateBalance(connection, senderId, sender.getBalance() - amount);
+		Savepoint savePoint = connection.setSavepoint();
 
 		try {
-			dao.updateBalance(conn, receiverId, receiver.getBalance() + amount);
-			conn.commit();
+			dao.updateBalance(connection, receiverId, receiver.getBalance() + amount);
+			connection.commit();
 			return "Transfer successful.";
 		} catch (SQLException e) {
-			conn.rollback(savePoint);
-			conn.commit(); 
+			connection.rollback(savePoint);
+			connection.commit(); 
 			
 			return "Credit failed. Debit retained. Manual correction needed.";
 		}

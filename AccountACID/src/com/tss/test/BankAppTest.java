@@ -11,8 +11,7 @@ public class BankAppTest {
 		int choice;
 
 		do {
-			System.out.println("\n======= Bank Application Menu =======");
-			System.out.println("1. Transfer Funds");
+			System.out.println("\n1. Transfer Funds");
 			System.out.println("2. View All Account Balances");
 			System.out.println("3. Exit");
 			System.out.print("Enter your choice: ");

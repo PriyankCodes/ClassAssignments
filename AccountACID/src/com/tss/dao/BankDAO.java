@@ -22,27 +22,27 @@ public class BankDAO {
 		return null;
 	}
 
-	public void updateBalance(Connection conn, int id, double newBalance) throws SQLException {
-		PreparedStatement ps = conn.prepareStatement("UPDATE accounts SET balance = ? WHERE id = ?");
-		ps.setDouble(1, newBalance);
-		ps.setInt(2, id);
-		ps.executeUpdate();
+	public void updateBalance(Connection connection, int id, double newBalance) throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE accounts SET balance = ? WHERE id = ?");
+		preparedStatement.setDouble(1, newBalance);
+		preparedStatement.setInt(2, id);
+		preparedStatement.executeUpdate();
 	}
 
 	public List<Account> getAllAccounts() throws Exception {
 	    List<Account> accounts = new ArrayList<>();
 	    String sql = "SELECT * FROM accounts";
 	    
-	    try (Connection conn = DBConnection.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement(sql);
-	         ResultSet rs = stmt.executeQuery()) {
+	    try (Connection connection = DBConnection.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql);
+	         ResultSet resultSet = statement.executeQuery()) {
 
-	        while (rs.next()) {
-	            Account acc = new Account();
-	            acc.setId(rs.getInt("id"));
-	            acc.setName(rs.getString("name"));
-	            acc.setBalance(rs.getDouble("balance"));
-	            accounts.add(acc);
+	        while (resultSet.next()) {
+	            Account account = new Account();
+	            account.setId(resultSet.getInt("id"));
+	            account.setName(resultSet.getString("name"));
+	            account.setBalance(resultSet.getDouble("balance"));
+	            accounts.add(account);
 	        }
 
 	    } catch (SQLException e) {
