@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+<style>
+    body {
+        background-color: #eef2f3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 125vh;
+        margin: 0;
+    }
+    form {
+        background: #fff;
+        padding: 25px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 350px;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    label {
+        display: block;
+        margin-top: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #444;
+    }
+    input, select, textarea, button {
+        width: 100%;
+        padding: 8px 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    input[type="radio"], input[type="checkbox"] {
+        width: auto;
+        margin-right: 5px;
+    }
+    .inline-options {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    button {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        margin-top: 15px;
+        padding: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+    }
+    button:hover {
+        background: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<form id="loginForm" action="LoginController" method="post">
+    <h2>Registration / Login Form</h2>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="3" required></textarea>
+
+    <label>Gender:</label>
+    <div class="inline-options">
+        <input type="radio" id="male" name="gender" value="Male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Female" required>
+        <label for="female">Female</label>
+    </div>
+
+    <label for="city">City:</label>
+    <select id="city" name="city" required>
+        <option value="">--Select City--</option>
+        <option value="Rajkot">Rajkot</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Mumbai">Mumbai</option>
+    </select>
+
+    <label>Language:</label>
+    <div class="inline-options">
+     <input type="checkbox" id="gujarati" name="language" value="Gujarati">
+        <label for="gujarati">Gujarati</label>
+        <input type="checkbox" id="english" name="language" value="English">
+        <label for="english">English</label>
+        <input type="checkbox" id="hindi" name="language" value="Hindi">
+        <label for="hindi">Hindi</label>
+    </div>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

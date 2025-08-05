@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+<style>
+    body {
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .form-container {
+        background: #fff;
+        padding: 20px 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        width: 300px;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #222;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #444;
+    }
+    input {
+        width: 95%;
+        padding: 8px;
+        margin-top: 4px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+    }
+    input:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+    .btn {
+        width: 100%;
+        padding: 9px;
+        margin-top: 12px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        transition: background 0.3s ease;
+    }
+    .btn-submit {
+        background: #4CAF50;
+    }
+    .btn-submit:hover {
+        background: #45a049;
+    }
+    .btn-view {
+        background: #2196F3;
+    }
+    .btn-view:hover {
+        background: #1976D2;
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Registration / Login</h2>
+
+    <form action="UserController" method="post">
+        <label >Username</label>
+        <input type="text" id="username" name="username" >
+
+        <label >Password</label>
+        <input type="password" id="password" name="password" >
+
+        <button type="submit" class="btn btn-submit">Submit</button>
+    </form>
+
+    <form action="UserController" method="get">
+        <input type="hidden" name="action" value="viewAll">
+        <button type="submit" class="btn btn-view">View All Users</button>
+    </form>
+</div>
+
+</body>
+</html>
