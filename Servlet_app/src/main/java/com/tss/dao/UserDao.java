@@ -3,7 +3,6 @@ package com.tss.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,37 +10,50 @@ import com.tss.model.User;
 
 public class UserDao {
 
+	// Insert user with username, password, and role
 	public boolean addNewUser(Connection connection, User user) {
-		try {
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES (?,?)");
-			statement.setString(1, user.getUsername());
-			statement.setString(2, user.getPassword());
-
-			int updates = statement.executeUpdate();
-			if (updates > 0) {
-				return true;
-			}
-
-		} catch (SQLException e) {
+		String sql = "INSERT INTO user (username, password, role) VALUES (?, ?, ?)";
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getRole());
+			return stmt.executeUpdate() > 0;
+		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	public List<User> getAllUsers(Connection connection) {
 		List<User> users = new ArrayList<>();
-		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT username, password FROM user");
-			ResultSet rs = statement.executeQuery();
+		String sql = "SELECT username, password, role FROM user";
+		try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
 			while (rs.next()) {
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				users.add(new User(username, password));
+				users.add(new User(rs.getString("username"), rs.getString("password"), rs.getString("role")));
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return users;
+	}
+
+	public boolean validateUser(Connection connection, String username, String password, String role) {
+		String sql = "SELECT username, password, role FROM user WHERE username = ? AND password = ? AND role = ?";
+		try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			stmt.setString(3, role);
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					return true;
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
