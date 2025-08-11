@@ -87,7 +87,7 @@ public class QuestionController extends HttpServlet {
 
 		int nextPage = page + 1;
 
-		if (nextPage <= 10) {
+		if (nextPage <= 5) {
 			response.sendRedirect("QuestionController?page=" + nextPage);
 		} else {
 			response.sendRedirect("ResultController");

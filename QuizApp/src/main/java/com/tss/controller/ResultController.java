@@ -27,7 +27,7 @@ public class ResultController extends HttpServlet {
         QuestionService questionService = new QuestionService();
         HttpSession session = request.getSession();
 
-        int totalQuestions = 10;
+        int totalQuestions = 5;
         int score = 0;
         List<String> userAnswers = new ArrayList<>();
 

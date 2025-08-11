@@ -12,21 +12,19 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Invalidate session
-        HttpSession session = request.getSession(false); // false = don't create new session
+        // Invalidate session (removes all session data)
+        HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
 
-        // Clear the "username" cookie
+        // Clear all cookies
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie c : cookies) {
-                if ("username".equals(c.getName())) {
-                    c.setMaxAge(0); // delete cookie
-                    c.setPath("/"); // must match the path it was set with
-                    response.addCookie(c);
-                }
+                c.setMaxAge(0);      
+                c.setPath("/");       // Important: path must match to successfully delete
+                response.addCookie(c); // Add to response to inform browser
             }
         }
 
