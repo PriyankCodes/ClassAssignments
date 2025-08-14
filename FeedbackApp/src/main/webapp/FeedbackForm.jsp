@@ -46,14 +46,14 @@
 <body>
     <div class="feedback-container">
         <h2>Feedback App</h2>
-        <form action="FeedbackController" method="post" class="needs-validation" novalidate>
+        <form action="FeedbackController" method="post" class="needs-validation" >
             
             <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input type="text" name="name" class="form-control" required>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4"> 
                 <label class="form-label">Session Date</label>
                 <input type="date" name="sessionDate" class="form-control" required>
             </div>
